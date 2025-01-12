@@ -1,0 +1,34 @@
+name: Deploy Walrus Site using Walrus Sites GA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+  
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies in temporary directory and Build Explorer
+        run: |
+          npm i
+          npm run build
+
+      - name: Deploy Phaser 3 TypeScript project to Walrus
+        uses: zktx-io/walrus-sites-ga@v0.2.15
+        with:
+          site-path: ${{ github.workspace }}/dist
+          network: 'testnet'
+          epochs: 200
+        env:
+          SUI_ADDRESS: ${{ vars.SUI_ADDRESS }}
+          SUI_KEYSTORE: ${{ secrets.SUI_KEYSTORE }}
