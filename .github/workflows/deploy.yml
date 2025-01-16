@@ -24,7 +24,7 @@ jobs:
           npm run build
 
       - name: Deploy Phaser 3 TypeScript project to Walrus
-        uses: zktx-io/walrus-sites-ga@v0.2.15
+        uses: zktx-io/walrus-sites-ga@v0.3.0
         with:
           site-path: ${{ github.workspace }}/dist
           object-id: '0x6f39a12152a48d05038654b623ef3b0f63a78f60547553ec7a89e02b854a4a83'
