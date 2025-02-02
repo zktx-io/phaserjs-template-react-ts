@@ -57,13 +57,14 @@ function App()
                 const y = Phaser.Math.Between(64, scene.scale.height - 64);
     
                 //  `add.sprite` is a Phaser GameObjectFactory method and it returns a Sprite Game Object instance
-                const star = scene.add.sprite(x, y, 'star');
+                const textureKey = Math.random() < 0.5 ? 'walrus' : 'sui';
+                const sprite = scene.add.sprite(x, y, textureKey);
     
                 //  ... which you can then act upon. Here we create a Phaser Tween to fade the star sprite in and out.
                 //  You could, of course, do this from within the Phaser Scene code, but this is just an example
                 //  showing that Phaser objects and systems can be acted upon from outside of Phaser itself.
                 scene.add.tween({
-                    targets: star,
+                    targets: sprite,
                     duration: 500 + Math.random() * 1000,
                     alpha: 0,
                     yoyo: true,
@@ -80,6 +81,18 @@ function App()
         
     }
 
+    const handleClick_1 = () => {
+        window.open("https://docs.walrus.site/walrus-sites/intro.html", "_blank", "noopener,noreferrer");
+    };
+
+    const handleClick_2 = () => {
+        window.open("https://github.com/marketplace/actions/walrus-sites-ga", "_blank", "noopener,noreferrer");
+    };
+
+    const handleClick_3 = () => {
+        window.open("https://github.com/zktx-io/phaserjs-template-react-ts", "_blank", "noopener,noreferrer");
+    };
+
     return (
         <div id="app">
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
@@ -95,6 +108,15 @@ function App()
                 </div>
                 <div>
                     <button className="button" onClick={addSprite}>Add New Sprite</button>
+                </div>
+                <div>
+                    <button className="button" onClick={handleClick_1}>walrus</button>
+                </div>
+                <div>
+                    <button className="button" onClick={handleClick_2}>walrus sites ga</button>
+                </div>
+                <div>
+                    <button className="button" onClick={handleClick_3}>example github</button>
                 </div>
             </div>
         </div>
