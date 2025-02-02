@@ -5,11 +5,11 @@ import { MainMenu } from './game/scenes/MainMenu';
 function App()
 {
     // The sprite can only be moved in the MainMenu Scene
-    const [canMoveSprite, setCanMoveSprite] = useState(true);
+    const [, setCanMoveSprite] = useState(true);
 
     //  References to the PhaserGame component (game and scene are exposed)
     const phaserRef = useRef<IRefPhaserGame | null>(null);
-    const [spritePosition, setSpritePosition] = useState({ x: 0, y: 0 });
+    const [spritePosition] = useState({ x: 0, y: 0 });
 
     const changeScene = () => {
 
@@ -22,26 +22,6 @@ function App()
                 scene.changeScene();
             }
         }
-    }
-
-    const moveSprite = () => {
-
-        if(phaserRef.current)
-        {
-
-            const scene = phaserRef.current.scene as MainMenu;
-
-            if (scene && scene.scene.key === 'MainMenu')
-            {
-                // Get the update logo position
-                scene.moveLogo(({ x, y }) => {
-
-                    setSpritePosition({ x, y });
-
-                });
-            }
-        }
-
     }
 
     const addSprite = () => {
@@ -93,6 +73,10 @@ function App()
         window.open("https://github.com/zktx-io/phaserjs-template-react-ts", "_blank", "noopener,noreferrer");
     };
 
+    const handleClick_4 = () => {
+        window.open("https://phaser.io/", "_blank", "noopener,noreferrer");
+    };
+
     return (
         <div id="app">
             <PhaserGame ref={phaserRef} currentActiveScene={currentScene} />
@@ -100,9 +84,13 @@ function App()
                 <div>
                     <button className="button" onClick={changeScene}>Change Scene</button>
                 </div>
-                <div>
-                    <button disabled={canMoveSprite} className="button" onClick={moveSprite}>Toggle Movement</button>
-                </div>
+                {
+                    /*
+                    <div>
+                        <button disabled={canMoveSprite} className="button" onClick={moveSprite}>Toggle Movement</button>
+                    </div>
+                    */
+                }
                 <div className="spritePosition">Sprite Position:
                     <pre>{`{\n  x: ${spritePosition.x}\n  y: ${spritePosition.y}\n}`}</pre>
                 </div>
@@ -117,6 +105,9 @@ function App()
                 </div>
                 <div>
                     <button className="button" onClick={handleClick_3}>example github</button>
+                </div>
+                <div>
+                    <button className="button" onClick={handleClick_4}>Phaser</button>
                 </div>
             </div>
         </div>
